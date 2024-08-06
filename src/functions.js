@@ -638,6 +638,10 @@ export function tagEvent(event, data){
 }
 
 export function modRes(res,val,notrack,buffer){
+    if(res === 'Food' && global.race['fasting']){
+        global.resource[res].amount = 0;
+        return false;
+    }
     let count = global.resource[res].amount + val;
     let success = true;
     if (count > global.resource[res].max && global.resource[res].max != -1){
@@ -783,7 +787,7 @@ export function costMultiplier(structure,offset,base,mutiplier,cat){
     if (offset){
         count += offset;
     }
-	var result = Math.round((mutiplier ** count) * base);
+    var result = Math.round((mutiplier ** count) * base);
     if (mutiplier ** count > 1) {
         result = base;
     }
