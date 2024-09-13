@@ -435,7 +435,7 @@
                             <button class="button right" :disabled="!s.disableReset" @click="reset()"><span class="settings3" aria-label="${t("settings3")}">{{ 'reset_hard' | label }}</span></button>
                         </p>
                         <p>
-                            <button class="button" :disabled="!s.disableReset" @click="unlock_crystalLake()"><span class="" aria-label="Unlock Crystal Lake">Unlock Crystal Lake</span></button>
+                            <button class="button" :disabled="!s.disableReset" @click="unlock_crystalLake()"><span class="settings4" aria-label="Unlock Crystal Lake">Unlock Crystal Lake</span></button>
                         </p>
                     </div>
                 </div>
