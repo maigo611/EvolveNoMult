@@ -3,17 +3,39 @@ import { clearElement } from './../functions.js';
 
 export const changeList = [
     {
-        version: `1.3.13`,
+        version: `1.3.14`,
         revision: `a`,
-        date: `8/6/2023`,
+        date: `9/2/2024`,
         changes: [
-            `Fix a bug that prevented crafting in Cataclysm and Lone Survivor modes.`
+            `Fixed incorrect scientist label.`
+        ]
+    },
+    {
+        version: `1.3.14`,
+        date: `9/2/2024`,
+        changes: [
+            `Fixed various bugs with Fasting scenario.`,
+            `Difficulty tweaks to Fasting scenario.`,
+            `Added feat Icon for Fasting.`,
+            `Ships in route to the Dwarf planet now check their fuel consumption.`,
+            `Manual crafting is no longer affected by High Population trait.`,
+            `Misc bug fixes.`
+        ]
+    },
+    {
+        version: `1.3.13`,
+        revision: `b`,
+        date: `8/6/2024`,
+        changes: [
+            `Fixed issue with starting Cataclysm Scenerio.`,
+            `Fixed some issues with Fasting Scenario.`,
+            `Fixed an issue with Replicator scheduler and supplies.`
         ]
     },
     {
         version: `1.3.13`,
         revision: `a`,
-        date: `8/6/2023`,
+        date: `8/6/2024`,
         changes: [
             `Fix a bug that prevented crafting in Cataclysm and Lone Survivor modes.`
         ]

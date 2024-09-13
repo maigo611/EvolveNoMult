@@ -2,7 +2,9 @@
 
 ## Play
 
-https://pmotschmann.github.io/Evolve/
+This is a modified version that all the cost multipliers are removed.
+
+https://boredbean.github.io/EvolveNoMult/
 
 ## About
 

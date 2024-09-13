@@ -54,7 +54,7 @@ export function mainVue(){
                 const minute = date.getMinutes().toFixed(0).padStart(2, '0');
                 downloadToFile(window.exportGame(), `evolve-${year}-${month}-${day}-${hour}-${minute}.txt`, 'text/plain');
             },
-            importStringFile(){ 
+            importStringFile(){
                 let file = document.getElementById("stringPackFile").files[0];
                 if (file) {
                     let reader = new FileReader();
@@ -68,7 +68,7 @@ export function mainVue(){
                             global.settings.sPackMsg = loc(`string_pack_error`,[fileName]);
                             return;
                         }
-                       
+
                         global.settings.sPackMsg = loc(`string_pack_using`,[fileName]);
                         save.setItem('string_pack_name',fileName); save.setItem('string_pack',LZString.compressToUTF16(evt.target.result));
                         if (global.settings.sPackOn){
@@ -79,7 +79,7 @@ export function mainVue(){
                             }
                             window.location.reload();
                         }
-                       
+
                     }
                     reader.onerror = function (evt) {
                         console.error("error reading file");
@@ -284,12 +284,13 @@ function tabLabel(lbl){
 }
 
 function updateQueueStyle(){
+    const buildingQueue = $('#buildQueue');
     ['standardqueuestyle', 'listqueuestyle', 'bulletlistqueuestyle', 'numberedlistqueuestyle']
-        .map(qstyle => {
+        .forEach(qstyle => {
             if (global.settings.queuestyle === qstyle) {
-                $('html').addClass(qstyle);
+                buildingQueue.addClass(qstyle);
             } else {
-                $('html').removeClass(qstyle);
+                buildingQueue.removeClass(qstyle);
             }
         });
 }
@@ -744,15 +745,15 @@ export function loadTab(tab){
                             $('#market').append(market_item);
                             marketItem(`#market-${name}`,market_item,name,color,true);
                         }
-                    
+
                         if (atomic_mass[name]){
                             loadEjector(name,color);
                         }
-                    
+
                         if (supplyValue[name]){
                             loadSupply(name,color);
                         }
-                    
+
                         if (tradeRatio[name] && global.race.universe === 'magic'){
                             global['resource'][name]['basic'] = tradable;
                             loadAlchemy(name,color,tradable);
@@ -889,7 +890,7 @@ export function index(){
             <div class="power"><span id="powerStatus" class="has-text-warning" v-show="city.powered"><span>MW</span> <span id="powerMeter" class="meter">{{ city.power | replicate | approx }}</span></span></div>
         </div>
         <div id="sideQueue">
-            <div id="buildQueue" class="bldQueue has-text-info" v-show="display"></div>
+            <div id="buildQueue" class="bldQueue standardqueuestyle has-text-info" v-show="display"></div>
             <div id="msgQueue" class="msgQueue vscroll has-text-info" aria-live="polite">
                 <div id="msgQueueHeader">
                     <h2 class="has-text-success">${loc('message_log')}</h2>
@@ -969,7 +970,7 @@ export function index(){
 
                         var body = $('<div id="specialModal" class="modalBody vscroll"></div>');
                         $('#modalBox').append(body);
-                        
+
                         let catVis = $(`
                             <div>
                                 <div>
@@ -996,18 +997,18 @@ export function index(){
                         body.append(catVis);
                         body.append(catMax);
                         body.append(catSave);
-                        
+
                         let visSet = ``;
                         let maxSet = ``;
                         let saveSet = ``;
-                        
+
                         let maxInputs = {};
                         let saveInputs = {};
                         message_filters.forEach(function (filter){
                             visSet += `<div class="msgInput" v-show="s.${filter}.unlocked"><span>${loc('message_log_' + filter)}</span> <b-checkbox class="patrol" v-model="s.${filter}.vis" :disabled="checkDisabled('${filter}',s.${filter}.vis)" :input="check('${filter}')"></b-checkbox></div>`;
                             maxSet += `<div class="msgInput" v-show="s.${filter}.unlocked"><span>${loc('message_log_' + filter)}</span> <b-numberinput :input="maxVal('${filter}')" min="1" v-model="mi.${filter}" :controls="false"></b-numberinput></div>`;
                             saveSet += `<div class="msgInput" v-show="s.${filter}.unlocked"><span>${loc('message_log_' + filter)}</span> <b-numberinput :input="saveVal('${filter}')" min="0" :max="s.${filter}.max" v-model="si.${filter}" :controls="false"></b-numberinput></div>`;
-                            
+
                             maxInputs[filter] = global.settings.msgFilters[filter].max;
                             saveInputs[filter] = global.settings.msgFilters[filter].save;
                         });
@@ -1024,8 +1025,8 @@ export function index(){
                                 <button class="button" @click="applySave()">${loc('message_log_settings_apply')}</button>
                             </div>
                         `);
-                        
-                        
+
+
                         vBind({
                             el: `#specialModal`,
                             data: {
@@ -1062,7 +1063,7 @@ export function index(){
                                             totVis++;
                                         }
                                     });
-                                    
+
                                     return totVis === 1;
                                 },
                                 maxVal(filter){
@@ -1205,6 +1206,7 @@ export function index(){
         {i: 'ghost',        f: 'halloween',         r: 1 },
         {i: 'candy',        f: 'trickortreat',      r: 1 },
         {i: 'turkey',       f: 'thanksgiving',      r: 1 },
+        {i: 'meat',         f: 'immortal',          r: 1 },
         {i: 'present',      f: 'xmas',              r: 1 }
     ];
 
@@ -1379,7 +1381,7 @@ export function index(){
         </div>
         <div class="stringPack setting">
             <button id="stringPack" class="button" @click="importStringFile">{{ 'load_string_pack' | label }}</button>
-            <input type="file" class="fileImport" id="stringPackFile" accept=".txt">
+            <input type="file" class="fileImport" id="stringPackFile" accept="text/plain, application/json">
             <button class="button right" @click="clearStringFile">{{ 'clear_string_pack' | label }}</button>
         </div>
         <div class="stringPack setting">
@@ -1433,6 +1435,7 @@ export function index(){
                     <span class="has-text-warning">${egg15.length > 0 ? `Ev${egg15}lve` : `Evolve`}</span>
                     by
                     <span class="has-text-success">Demagorddon</span>
+                    but modified
                 </h1>
             </span>
             <span class="right">
@@ -1442,6 +1445,7 @@ export function index(){
                     <li><a href="https://www.reddit.com/r/EvolveIdle/" target="_blank">Reddit</a></li>
                     <li><a href="https://discord.gg/dcwdQEr" target="_blank">Discord</a></li>
                     <li><a href="https://github.com/pmotschmann/Evolve" target="_blank">GitHub</a></li>
+                    <li><a href="https://github.com/BoredBean/EvolveNoMult" target="_blank">Modified</a></li>
                     <li><a href="https://www.patreon.com/demagorddon" target="_blank">Patreon</a></li>
                     <li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=PTRJZBW9J662C&currency_code=USD&source=url" target="_blank">Donate</a></li>
                 </ul>
