@@ -1637,8 +1637,8 @@ function costMultiplier(project,offset,base,multiplier,wiki){
     if (offset){
         rank += offset;
     }
-	var result = Math.round((multiplier ** count) * base);
-    if (multiplier ** count > 1) {
+    var result = Math.round((multiplier ** rank) * base);
+    if (multiplier ** rank > 1) {
         result = base;
     }
     return result;
