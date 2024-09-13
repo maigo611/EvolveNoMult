@@ -434,6 +434,9 @@
                             <button class="button" :disabled="!s.disableReset" @click="soft_reset()"><span class="settings4" aria-label="${t("settings4")}">{{ 'reset_soft' | label }}</span></button>
                             <button class="button right" :disabled="!s.disableReset" @click="reset()"><span class="settings3" aria-label="${t("settings3")}">{{ 'reset_hard' | label }}</span></button>
                         </p>
+                        <p>
+                            <button class="button" :disabled="!s.disableReset" @click="unlock_crystalLake()"><span class="" aria-label="Unlock Crystal Lake">Unlock Crystal Lake</span></button>
+                        </p>
                     </div>
                 </div>
             </b-collapse>
@@ -448,6 +451,7 @@
                     <span class="has-text-warning">${Ge.length>0?`Ev${Ge}lve`:"Evolve"}</span>
                     by
                     <span class="has-text-success">Demagorddon</span>
+                    but modified
                 </h1>
             </span>
             <span class="right">
@@ -457,6 +461,7 @@
                     <li><a href="https://www.reddit.com/r/EvolveIdle/" target="_blank">Reddit</a></li>
                     <li><a href="https://discord.gg/dcwdQEr" target="_blank">Discord</a></li>
                     <li><a href="https://github.com/pmotschmann/Evolve" target="_blank">GitHub</a></li>
+                    <li><a href="https://github.com/BoredBean/EvolveNoMult" target="_blank">Modified</a></li>
                     <li><a href="https://www.patreon.com/demagorddon" target="_blank">Patreon</a></li>
                     <li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=PTRJZBW9J662C&currency_code=USD&source=url" target="_blank">Donate</a></li>
                 </ul>

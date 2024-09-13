@@ -2806,3 +2806,11 @@ export function drawStats(){
         }
     });
 }
+
+window.unlock_crystalLake = function unlock(){
+    let murder = false;
+    murder = unlockFeat('friday',global.race.universe === 'micro' ? true : false);
+    if (murder){
+        global.resource[global.race.species].amount--;
+    }
+}
