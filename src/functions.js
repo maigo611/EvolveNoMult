@@ -778,20 +778,23 @@ export function costMultiplier(structure,offset,base,mutiplier,cat){
     }
     let nqVal = govActive('noquestions',0);
     if (nqVal){
-        mutiplier -= nqVal;
+    //    mutiplier -= nqVal;
+        mutiplier = 1.01;
     }
-    if (mutiplier < 1.005){
-        mutiplier = 1.005;
-    }
+    // if (mutiplier < 1.005){
+    //     mutiplier = 1.005;
+    // }
     var count = structure === 'citizen' ? global['resource'][global.race.species].amount : (global[cat][structure] ? global[cat][structure].count : 0);
     if (offset){
         count += offset;
     }
-	var result = Math.round((mutiplier ** count) * base);
-    if (mutiplier ** count > 1) {
-        result = base;
-    }
-    return result;
+    return Math.round((mutiplier ** count) * base);
+
+	// var result = Math.round((mutiplier ** count) * base);
+    // if (mutiplier ** count > 1) {
+    //     result = base;
+    // }
+    // return result;
 }
 
 export function spaceCostMultiplier(action,offset,base,mutiplier,sector,c_min){

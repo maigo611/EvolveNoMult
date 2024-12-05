@@ -1637,11 +1637,20 @@ function costMultiplier(project,offset,base,multiplier,wiki){
     if (offset){
         rank += offset;
     }
-    var result = Math.round((multiplier ** rank) * base);
     if (multiplier ** rank > 1) {
-        result = base;
+        multiplier = 1.01;
     }
-    return result;
+    return Math.round((multiplier ** rank) * base);
+
+    // 原蠕变
+    //  return Math.round((multiplier ** rank) * base);
+
+    // 无蠕变
+    // var result = Math.round((multiplier ** rank) * base);
+    // if (multiplier ** rank > 1) {
+    //     result = base;
+    // }
+    // return result;
 }
 
 function physics(){
